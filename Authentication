@@ -1,0 +1,51 @@
+####  AUTHENTICATION ####
+import com.mysql.jdbc.*;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.util.Scanner;
+import org.json.JSONObject;
+
+
+public class jdbc {
+    public static void main(String[] args){
+        String db_url = "jdbc:mysql://127.0.0.1/test";  // replace this with url of your database
+        String user = "admin";
+        String sql;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter roll number");
+        String roll = sc.next();
+        System.out.println("Enter password");
+        String password = sc.next();
+        String pass = null;
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs =  null;
+        JSONObject json = new JSONObject();
+        System.out.println("Checking for the Authentication");
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            System.out.println("Connecting to Database");
+            conn = (Connection)DriverManager.getConnection(db_url,user,pass);
+            stmt = (Statement)conn.createStatement();
+            //sql = "select * from studentdata";
+            sql = "select * from studentdata where rollno= '"+roll+"' and password= '"+password+"' ";
+            rs = stmt.executeQuery(sql);
+            
+            int token = 0;
+            while(rs.next()){
+                token = Integer.parseInt(rs.getString("rollno"));
+            }
+            
+            if(token>0){
+                System.out.println("Authentication Successful");
+            }
+            else{
+                System.out.println("Authentiaction failed");
+            }
+            conn.close();
+        }catch(Exception e){
+            System.out.println("Something went wrong");
+        }
+        
+    }
+}
