@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="points">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>J</item>
+        <item>K</item>
+        <item>L</item>
+        <item>B Block</item>
+        <item>Library</item>
+        <item>E Block</item>
+    </string-array>
+</resources>
